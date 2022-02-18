@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<title>Consultant index</title>
+
+{% block body %}
+    <h1>Consultant index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Password</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for consultant in consultants %}
+            <tr>
+                <td>{{ consultant.id }}</td>
+                <td>{{ consultant.email }}</td>
+                <td>{{ consultant.roles ? consultant.roles|json_encode : '' }}</td>
+                <td>{{ consultant.password }}</td>
+                <td>
+                    <a href="{{ path('consultant_show', {'id': consultant.id}) }}">show</a>
+                    <a href="{{ path('consultant_edit', {'id': consultant.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('consultant_new') }}">Create new</a>
+{% endblock %}
